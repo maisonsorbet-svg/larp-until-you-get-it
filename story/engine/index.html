@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: Inter; font-weight: 900; src: url('/fonts/Inter-Black.otf'); }
+  @font-face { font-family: Inter; font-weight: 700; src: url('/fonts/Inter-Bold.otf'); }
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  #c, #grade, #fade { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  #grade { pointer-events: none; }
+  #fade { background: #000; opacity: 0; }
+  /* vignette for a filmic look */
+  #vig { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%); }
+  /* captions sit above TikTok's bottom caption/UI area and left of its buttons */
+  #cap { position: absolute; left: 80px; right: 160px; top: 1060px; text-align: center;
+         font: 900 84px/1.12 Inter, sans-serif; color: #fff; letter-spacing: -1px;
+         paint-order: stroke fill; -webkit-text-stroke: 14px #000;
+         filter: drop-shadow(0 6px 0 rgba(0,0,0,.6)); }
+  #cap.big { font-size: 104px; top: 980px; }
+  #cap.small { font-size: 64px; }
+  #cap .w { display: inline-block; transform-origin: 50% 70%; margin: 0 .16em; }
+  #cap .hl { color: #ffd400; }
+  #label { position: absolute; top: 160px; left: 0; right: 0; text-align: center;
+           font: 700 34px Inter, sans-serif; color: #fff; letter-spacing: 4px; text-transform: uppercase;
+           text-shadow: 0 2px 8px rgba(0,0,0,.8); }
+  #label b { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #ff3b30; margin-right: 14px; }
+</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js" } }</script>
+</head>
+<body>
+  <canvas id="c" width="1080" height="1920"></canvas>
+  <div id="grade"></div>
+  <div id="vig"></div>
+  <div id="label"></div>
+  <div id="cap"></div>
+  <div id="fade"></div>
+  <script type="module" src="./engine.js"></script>
+</body>
+</html>
