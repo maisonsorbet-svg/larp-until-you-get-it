@@ -103,7 +103,7 @@ The voice comes from [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M), an
 cd story
 npm install --onnxruntime-node-install-cuda=skip  # first time only
 python3 voice/setup.py                            # downloads the model (about 92 MB)
-node voice/narrate.mjs pretend-town --voice am_michael --speed 1.1
+node voice/narrate.mjs pretend-town --voice am_adam --speed 1.1
 node render.js pretend-town                       # shots and captions now follow the voice
 node render.js pretend-town --events
 python3 audio/mix.py pretend-town --music bouncy  # voice + music (lowered under the voice) + effects

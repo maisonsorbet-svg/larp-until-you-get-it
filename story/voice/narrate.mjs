@@ -14,7 +14,7 @@ import { pathToFileURL } from 'url';
 const args = process.argv.slice(2);
 const name = args.find((a) => !a.startsWith('--')) || 'pretend-town';
 const opt = (k, d) => { const i = args.indexOf('--' + k); return i >= 0 ? args[i + 1] : d; };
-const VOICE = opt('voice', 'am_michael');
+const VOICE = opt('voice', 'am_adam');
 const SPEED = Number(opt('speed', '1.1'));
 const GAP = 0.12;                       // pause between lines inside a shot
 const TAIL = 0.3;                       // breathing room before the next cut
