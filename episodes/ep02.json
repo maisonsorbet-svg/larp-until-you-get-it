@@ -1,0 +1,13 @@
+{
+  "series": "Larp until you get it",
+  "episode": 2,
+  "slides": [
+    { "text": "Your dream needs a *daily* version.", "style": "big" },
+    { "text": "\"Be successful\" is not a plan.", "style": "normal" },
+    { "text": "\"Write 200 words before 9am\" *is*.", "style": "normal" },
+    { "text": "Shrink the dream until you can do it *today*.", "style": "normal" },
+    { "text": "Then do it again tomorrow.", "style": "small" },
+    { "text": "Identity is built in *reps*.", "style": "big" },
+    { "text": "Follow for episode 3.", "style": "small", "hold": 1.5 }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "series": "Larp until you get it",
+  "episode": 3,
+  "slides": [
+    { "text": "Dress the part. *Seriously.*", "style": "big" },
+    { "text": "Not for them.\nFor *you*.", "style": "normal" },
+    { "text": "Set up your space like the dream already happened.", "style": "normal" },
+    { "text": "The desk. The playlist. The calendar.", "style": "small" },
+    { "text": "Make the future feel *normal*.", "style": "big" },
+    { "text": "Follow for episode 4.", "style": "small", "hold": 1.5 }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "series": "Larp until you get it",
+  "episode": 1,
+  "slides": [
+    { "text": "Larp until you *get it*.", "style": "big", "hold": 1.6 },
+    { "text": "Not lying.\nNot faking.", "style": "normal" },
+    { "text": "Acting like the person you're *becoming*.", "style": "normal" },
+    { "text": "Step 1: write down exactly who that person is.", "style": "normal" },
+    { "text": "How do they wake up? What do they say no to?", "style": "small" },
+    { "text": "Tomorrow, do *one* thing they would do.", "style": "big" },
+    { "text": "Follow for episode 2.", "style": "small", "hold": 1.5 }
+  ]
+}
