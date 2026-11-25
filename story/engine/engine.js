@@ -73,6 +73,13 @@ async function load() {
   const name = new URLSearchParams(location.search).get('story') || 'great-impostor';
   const story = (await import(`../stories/${name}.js`)).default;
   if (story.toneMapping === 'none') renderer.toneMapping = THREE.NoToneMapping;
+  if (new URLSearchParams(location.search).get('timing')) {      // follow the narrator's voice
+    const tm = await (await fetch(`/out/${name}.timing.json`)).json();
+    story.shots.forEach((s, i) => {
+      s.dur = tm.shots[i].dur;
+      (s.captions || []).forEach((c, j) => Object.assign(c, tm.shots[i].captions[j]));
+    });
+  }
   if (story.captionMode) document.body.classList.add('cap-' + story.captionMode);
   await document.fonts.load('900 80px Inter');
   await document.fonts.load('700 30px Inter');
@@ -149,9 +156,15 @@ function drawCaption(shot, t, story) {
   if (story.captionMode === 'word') {            // one word at a time, narration pace
     const words = cur.text.split(' ');
     const wps = cur.wps || story.wps || 2.7;
-    const i = Math.min(words.length - 1, Math.floor(lt * wps));
+    let i = Math.min(words.length - 1, Math.floor(lt * wps)), wStart = i / wps;
+    if (cur.dur) {                                // spoken line: words timed by their length
+      const w8 = words.map((w) => w.replace(/[^\w$']/g, '').length + 1.5);
+      const tot = w8.reduce((a, b) => a + b, 0);
+      let acc = 0; i = 0;
+      for (let k = 0; k < words.length; k++) { const s0 = (acc / tot) * cur.dur; if (lt >= s0) { i = k; wStart = s0; } acc += w8[k]; }
+    }
     if (cur.hold === false && lt * wps >= words.length + 0.6) { $cap.innerHTML = ''; return; }
-    const wt = lt - i / wps, p = Math.min(1, wt / 0.12);
+    const wt = lt - wStart, p = Math.min(1, wt / 0.12);
     const sc = 0.7 + 0.3 * p + Math.sin(p * Math.PI) * 0.12;
     const w = words[i];
     $cap.className = '';

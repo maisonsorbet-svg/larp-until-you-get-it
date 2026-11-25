@@ -96,3 +96,16 @@ python3 audio/mix.py pretend-town --music bouncy  # -> out/pretend-town.bouncy.m
   - coins when cash rains, and an engine sound for the sports car
 - **Extra cues:** add `sfx: [{ at, name, gain }]` to a shot. Add `music: 'suspense'` to switch the music from that shot on.
 - **Volume:** `--music-db -10` makes the music quieter, for example under a loud voiceover.
+
+## Narrator voice
+The voice comes from [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M), an open-source text-to-speech model under the Apache-2.0 licence. It runs locally through `kokoro-js`.
+```bash
+cd story
+npm install --onnxruntime-node-install-cuda=skip  # first time only
+python3 voice/setup.py                            # downloads the model (about 92 MB)
+node voice/narrate.mjs pretend-town --voice am_michael --speed 1.1
+node render.js pretend-town                       # shots and captions now follow the voice
+node render.js pretend-town --events
+python3 audio/mix.py pretend-town --music bouncy  # voice + music (lowered under the voice) + effects
+```
+Voices: `am_michael`, `am_adam`, `am_puck`, `am_echo`, `am_fenrir` (American male), `bm_george` (British male), and `af_heart`, `af_bella` (American female). `--speed` sets the talking speed (1.0 is normal).

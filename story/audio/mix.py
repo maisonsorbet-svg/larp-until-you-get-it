@@ -45,6 +45,7 @@ def main():
     ap.add_argument('--music', default='bouncy', help='bouncy | lofi | suspense | hype')
     ap.add_argument('--music-db', type=float, default=-7, help='music level (lower = quieter)')
     ap.add_argument('--no-sfx', action='store_true')
+    ap.add_argument('--no-voice', action='store_true')
     a = ap.parse_args()
 
     out = ROOT / 'out'
@@ -85,7 +86,26 @@ def main():
             for e in s['sfx']:
                 place(sfx, S[e['name']], t0 + e['at'], 0.5 * e.get('gain', 1))
 
-    mix = music + sfx
+    # narrator voice + ducking the music under it
+    tf = out / f'{a.story}.timing.json'
+    if tf.exists() and not a.no_voice:
+        tm = json.loads(tf.read_text())
+        voice = np.zeros((n, 2), np.float32)
+        for ln in tm['lines']:
+            sr, v = wavfile.read(ROOT / ln['file'])
+            v = v.astype(np.float32) / 32768
+            if sr != SR:                                  # Kokoro speaks at 24 kHz
+                idx = np.arange(0, len(v) - 1, sr / SR); v = np.interp(idx, np.arange(len(v)), v)
+            v = v / (np.max(np.abs(v)) + 1e-9) * 0.9
+            place(voice, np.column_stack([v, v]), ln['t'])
+        env = np.convolve(np.abs(voice[:, 0]), np.ones(int(0.25 * SR)) / int(0.25 * SR), mode='same')
+        duck = 1 - 0.55 * np.clip(env / 0.05, 0, 1)        # music drops ~7 dB while the narrator talks
+        music *= duck[:, None]
+        sfx *= (1 - 0.3 * np.clip(env / 0.05, 0, 1))[:, None]
+        mix_voice = voice
+    else:
+        mix_voice = 0
+    mix = music + sfx + mix_voice
     peak = np.max(np.abs(mix))
     if peak > 0.95: mix *= 0.95 / peak
     wav = out / f'{a.story}.soundtrack.wav'

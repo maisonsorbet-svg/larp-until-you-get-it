@@ -41,7 +41,9 @@ function serve() {
   const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
   page.on('pageerror', (e) => console.error('page error:', e.message));
-  await page.goto(`http://127.0.0.1:${srv.address().port}/engine/index.html?story=${name}`);
+  const useVoice = !args.includes('--no-voice') && fs.existsSync(path.join(OUT, `${name}.timing.json`));
+  if (useVoice) console.log('using narrator timing from', `out/${name}.timing.json`);
+  await page.goto(`http://127.0.0.1:${srv.address().port}/engine/index.html?story=${name}${useVoice ? '&timing=1' : ''}`);
   await page.waitForFunction(() => window.READY || document.body.dataset.error, null, { timeout: 60000 });
   const err = await page.evaluate(() => document.body.dataset.error);
   if (err) throw new Error(err);
