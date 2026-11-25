@@ -77,3 +77,22 @@ cd story && node render.js pretend-town     # -> story/out/pretend-town.mp4
 - `popups: [{ at, text: '+$500' }]` shows a money pill. Add `kind: 'day'` for a pink badge.
 - `rain: { at: 0 }` makes cash fall from the sky.
 - `move: { to: [x,y,z], dur }` makes a character walk somewhere.
+
+## Sound: original music and sound effects
+All the sounds are synthesized from code: no samples and no downloads, so they're yours to use.
+```bash
+cd story
+pip install numpy scipy
+python3 audio/synth.py                            # makes audio/music/*.wav and audio/sfx/*.wav (about 4 s)
+node render.js pretend-town --events              # exports the video's timeline
+python3 audio/mix.py pretend-town --music bouncy  # -> out/pretend-town.bouncy.mp4
+```
+- **Music:** `bouncy` (happy and cartoony), `lofi` (chill), `suspense` (ticking clock) and `hype` (trap 808s).
+- **Effects:** pop, ding, cash, coins, whoosh, womp, scratch, vroom, boing, laugh and drumroll.
+- **Automatic cues:**
+  - a whoosh on every cut
+  - a pop and a ding on DAY badges
+  - a cash register on "+$" pop-ups, and a sad trombone on other money pop-ups
+  - coins when cash rains, and an engine sound for the sports car
+- **Extra cues:** add `sfx: [{ at, name, gain }]` to a shot. Add `music: 'suspense'` to switch the music from that shot on.
+- **Volume:** `--music-db -10` makes the music quieter, for example under a loud voiceover.

@@ -40,7 +40,7 @@ export default {
       captions: [{ at: 0.1, text: 'So he started pretending to be *rich.*' }],
     },
     { // 4 — day 1: everyone laughs
-      dur: 3.7, set: 'town', update: { billboard: 'DAY 1' },
+      dur: 3.7, sfx: [{ at: 1.6, name: 'laugh', gain: 0.6 }], set: 'town', update: { billboard: 'DAY 1' },
       cam: { from: V([8, 1.4, 0], 8.4, 2), to: V([8, 1.4, 0], 7.6, -2), fov: 45 },
       chars: [
         { who: 'leoR', pos: [8, 0.3, 0], rotY: R, state: { anim: 'flex', face: 'smug' } },
@@ -70,7 +70,7 @@ export default {
       captions: [{ at: 0.1, text: 'Day twenty-nine. His bank account? *Three* dollars.' }],
     },
     { // 7 — day 30
-      dur: 2.0, set: 'town', update: { billboard: 'DAY 30' }, shake: { amt: 0.05, dur: 0.5 },
+      dur: 2.0, sfx: [{ at: 0, name: 'drumroll', gain: 0.8 }], set: 'town', update: { billboard: 'DAY 30' }, shake: { amt: 0.05, dur: 0.5 },
       cam: { from: V([8, 1.7, 0], 4.6, 0, 0.1), to: V([8, 1.75, 0], 3.4, 0, 0.1), fov: 42 },
       chars: [{ who: 'leoR', pos: [8, 0.3, 0], rotY: R, state: { face: 'shock', anim: 'shock', shades: false } }],
       popups: [{ at: 0.05, text: 'DAY 30', kind: 'day', y: 470, dur: 2.0 }],
@@ -90,7 +90,7 @@ export default {
       captions: [{ at: 0.1, text: 'A sports car. A mansion. *Everything.*' }],
     },
     { // 10 — the twist begins
-      dur: 3.8, set: 'town', update: { billboard: '$1,000,000' },
+      dur: 3.8, music: 'suspense', sfx: [{ at: 0, name: 'scratch' }], set: 'town', update: { billboard: '$1,000,000' },
       cam: { from: V([8, 1.4, -2.5], 7.6, 30), to: V([8, 1.4, -2.0], 6.8, 24), fov: 45 },
       chars: [{ who: 'max', pos: [8.3, 0.3, -9], move: { to: [8.1, 0.3, -1.5], at: 0, dur: 2.8, linear: true }, state: { face: 'smug' }, states: [{ at: 2.8, state: { anim: 'idle' } }] }],
       captions: [{ at: 0.1, text: 'But his best friend Max had been pretending too...' }],
@@ -102,7 +102,7 @@ export default {
       captions: [{ at: 0.1, text: '...pretending to be *Leo.*' }, { at: 1.6, text: 'And today was day thirty.' }],
     },
     { // 12 — two Leos
-      dur: 4.0, set: 'town', update: { billboard: '???' },
+      dur: 4.0, sfx: [{ at: 0.05, name: 'boing', gain: 0.7 }], set: 'town', update: { billboard: '???' },
       cam: { from: V([8, 1.4, 0], 7.0, 35), to: V([8, 1.4, 0], 7.0, -35), fov: 45 },
       chars: [
         { who: 'leoR', pos: [8, 0.3, 0.9], rotY: Math.PI, state: { anim: 'shock', face: 'shock', shades: false } },
@@ -111,7 +111,7 @@ export default {
       captions: [{ at: 0.1, text: 'Now there are two Leos...' }, { at: 2.1, text: '...and *one* bank account.' }],
     },
     { // 13 — part 2?
-      dur: 2.0, set: 'town', update: { billboard: 'PART 2?' },
+      dur: 2.0, sfx: [{ at: 0.1, name: 'ding' }], set: 'town', update: { billboard: 'PART 2?' },
       cam: { from: V([8, 1.4, 0], 7.4, 0), to: V([8, 1.45, 0], 6.6, 0), fov: 45 },
       chars: [
         { who: 'leoR', pos: [8, 0.3, 0.9], rotY: Math.PI + 0.5, state: { anim: 'point', face: 'angry', shades: false } },

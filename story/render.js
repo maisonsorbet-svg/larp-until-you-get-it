@@ -48,7 +48,15 @@ function serve() {
   const duration = await page.evaluate(() => window.DURATION);
 
   const stills = opt('stills');
-  if (stills) {
+  if (args.includes('--events')) {          // timeline for the sound mixer
+    const ev = await page.evaluate(() => window.STORY.shots.map((s) => ({
+      start: s.start, dur: s.dur, music: s.music || null, sfx: s.sfx || [],
+      popups: s.popups || [], rain: s.rain || null, sportsCar: (s.update || {}).sportsCar || null,
+    })));
+    const f = path.join(OUT, `${name}.events.json`);
+    fs.writeFileSync(f, JSON.stringify({ duration, shots: ev }, null, 1));
+    console.log('events', f);
+  } else if (stills) {
     for (const s of stills.split(',')) {
       await page.evaluate((t) => window.renderAt(t), Number(s));
       const f = path.join(OUT, `${name}_${s}s.png`);
