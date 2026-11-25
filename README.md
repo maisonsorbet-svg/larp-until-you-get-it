@@ -66,3 +66,14 @@ Each shot looks like this:
   captions: [{ at: 0.1, text: 'Then he *operated.*', style: 'big' }] }
 ```
 Character states: `mouth` (smile, smirk, open, worried, flat), `brows` (calm, worried, angry, shock, smug), `wide` (big eyes), `talk` (animated mouth), and `pose` (stand, wave, read, paper, lie).
+
+## "In this town" style (bright blocky city)
+```bash
+cd story && node render.js pretend-town     # -> story/out/pretend-town.mp4
+```
+- `set: 'town'` is a sunny toy city: shops, towers, trees, traffic, a billboard (`update: { billboard: 'DAY 1' }`) and a sports car (`update: { sportsCar: {...} }`).
+- Characters with `kind: 'blocky'` are 3D block people. Options: `anim` (idle, walk, run, cheer, laugh, point, shock, sad, flex), `face` (happy, laugh, cheer, smug, sad, shock, angry), `shades`, `chain` and `hairStyle` (cap, long).
+- `captionMode: 'word'` shows one big word at a time, at `wps` words per second.
+- `popups: [{ at, text: '+$500' }]` shows a money pill. Add `kind: 'day'` for a pink badge.
+- `rain: { at: 0 }` makes cash fall from the sky.
+- `move: { to: [x,y,z], dur }` makes a character walk somewhere.

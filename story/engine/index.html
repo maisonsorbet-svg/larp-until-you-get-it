@@ -23,6 +23,20 @@
   #label { position: absolute; top: 160px; left: 0; right: 0; text-align: center;
            font: 700 34px Inter, sans-serif; color: #fff; letter-spacing: 4px; text-transform: uppercase;
            text-shadow: 0 2px 8px rgba(0,0,0,.8); }
+  #pops { position: absolute; inset: 0; pointer-events: none; }
+  .pop { position: absolute; left: 50%; white-space: nowrap; font: 900 96px Inter, sans-serif; }
+  .pop.money { display: flex; align-items: center; gap: 22px; padding: 18px 54px 18px 26px; border-radius: 80px;
+    background: linear-gradient(180deg, #7ff5e4, #2fd3c0); color: #fff; border: 8px solid #fff;
+    -webkit-text-stroke: 3px #11806f; paint-order: stroke fill; box-shadow: 0 14px 0 rgba(0,0,0,.18); }
+  .pop.money i { width: 104px; height: 104px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff59d, #ffd400 45%, #e0a800);
+    border: 7px solid #c98f00; display: inline-block; }
+  .pop.day { padding: 14px 50px; border-radius: 26px; background: #ff3d7f; color: #fff; border: 8px solid #fff;
+    font-size: 110px; letter-spacing: 2px; box-shadow: 0 14px 0 rgba(0,0,0,.2); }
+  /* one-word caption style (like the reference): big lime-yellow word, heavy black outline */
+  body.cap-word #cap { top: 1120px; font-size: 150px; color: #eaff3d; -webkit-text-stroke: 22px #000; letter-spacing: 0; }
+  body.cap-word #cap .w { color: #eaff3d; }
+  body.cap-word #cap .w.hl { color: #ffffff; }
+  body.cap-word #vig { display: none; }
   #label b { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #ff3b30; margin-right: 14px; }
 </style>
 <script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js" } }</script>
@@ -32,6 +46,7 @@
   <div id="grade"></div>
   <div id="vig"></div>
   <div id="label"></div>
+  <div id="pops"></div>
   <div id="cap"></div>
   <div id="fade"></div>
   <script type="module" src="./engine.js"></script>
